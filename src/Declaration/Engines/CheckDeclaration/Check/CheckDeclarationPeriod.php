@@ -2,15 +2,16 @@
 
 namespace App\Declaration\Engines\CheckDeclaration\Check;
 
+use App\Core\Engines\AbstractEngines;
 use App\Core\Engines\EngineInterface;
 use App\Declaration\Exception\DeclarationErrorException;
 use App\Declaration\Model\Declaration;
 
 
-final class CheckDeclarationPeriod extends AbstractCheckDeclaration
+final class CheckDeclarationPeriod extends AbstractEngines
 {
 
-    private EngineInterface $nextEngine;
+
 
     public function execute( mixed ...$args): Declaration
     {
@@ -38,8 +39,8 @@ final class CheckDeclarationPeriod extends AbstractCheckDeclaration
             throw new DeclarationErrorException('Period must be less than the difference between start and end date');
         }
 
-        if ($this->nextEngine) {
-            $this->nextEngine->execute($declaration);
+        if (isset($this->nextEngine)) {
+                $this->nextEngine->execute($declaration);
         }
 
         return $declaration;

@@ -5,16 +5,15 @@ namespace App\Declaration\Engines\CheckDeclaration\Check;
 
 
 
+use App\Core\Engines\AbstractEngines;
 use App\Core\Engines\EngineInterface;
 use App\Declaration\Exception\DeclarationErrorException;
 use App\Declaration\Model\Declaration;
 
 
 
-final class CheckFormulaireMillesimeExiste extends AbstractCheckDeclaration
+final class CheckFormulaireMillesimeExiste extends AbstractEngines
 {
-
-    private EngineInterface $nextEngine;
 
     /**
      * @throws DeclarationErrorException
