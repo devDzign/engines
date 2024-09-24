@@ -5,6 +5,7 @@ namespace App\Declaration\Engines\CheckDeclaration\Check;
 
 
 
+use App\Core\Engines\EngineInterface;
 use App\Declaration\Exception\DeclarationErrorException;
 use App\Declaration\Model\Declaration;
 
@@ -13,12 +14,14 @@ use App\Declaration\Model\Declaration;
 final class CheckFormulaireMillesimeExiste extends AbstractCheckDeclaration
 {
 
+    private EngineInterface $nextEngine;
+
     /**
      * @throws DeclarationErrorException
      */
-        public function execute(mixed ...$declaration): Declaration
+        public function execute(mixed ...$args): Declaration
     {
-        $declaration = $declaration[0];
+        $declaration = $args[0];
 
         assert($declaration instanceof Declaration);
         $millesime = $declaration->millesime;
@@ -38,5 +41,10 @@ final class CheckFormulaireMillesimeExiste extends AbstractCheckDeclaration
         }
 
         return $declaration;
+    }
+
+    public function setNext(EngineInterface $engine): void
+    {
+        $this->nextEngine = $engine;
     }
 }

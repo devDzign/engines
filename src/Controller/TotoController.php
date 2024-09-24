@@ -2,22 +2,30 @@
 
 namespace App\Controller;
 
+use App\Declaration\Model\Declaration;
+
 use App\Declaration\Workflow\DeclarationCreatedWorkflow;
+use App\Logger\Workflow\LoggerWorkflow;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Attribute\Route;
 
 class TotoController extends AbstractController
 {
-    #[Route('/', name: 'app_home')]
-    public function index(DeclarationCreatedWorkflow $createdWorkflow): JsonResponse
+    #[Route('/', name: 'app_test')]
+    public function index(
+        DeclarationCreatedWorkflow $createdWorkflow,
+        LoggerWorkflow $loggerWorkflow
+    ): JsonResponse
     {
-        $declaration = (new \stdClass());
-        $createdWorkflow->run($declaration);
+        $declaration = (new Declaration('1'));
+        $message = $loggerWorkflow->run('MON MESSAGE');
 
-        return $this->json([
-            'message' => 'Welcome to your new controller!',
-            'path' => 'src/Controller/TotoController.php',
-        ]);
+
+//        $createdWorkflow->run($declaration);
+
+        return $this->json(
+            $message
+        );
     }
 }
