@@ -14,7 +14,7 @@ class RapportLogger extends AbstractEngines
     {
         $message = 'Report - '.$arg[0];
         assert(is_string($message));
-        $this->logger->error('Error: ' . $message);
+        $this->logger->error('Report: ' . $message);
 
         if (isset($this->nextEngine)) {
            return  $this->nextEngine->execute($message);

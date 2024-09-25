@@ -14,7 +14,7 @@ class WerningLogger extends AbstractEngines
     {
         $message = 'Warning - '. $arg[0];
         assert(is_string($message));
-        $this->logger->info('Report: ' . $message);
+        $this->logger->info('Warning: ' . $message);
 
         if ($this->nextEngine) {
             return $this->nextEngine->execute($message);
