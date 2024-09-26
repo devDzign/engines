@@ -10,10 +10,10 @@ use App\Core\Engines\AbstractEngines;
 class NineActivity extends AbstractEngines
 {
 
-    public function execute(...$arg): mixed
+    public function execute(...$arg): string
     {
         $message =  $arg[0];
 
-        return $message.(new \ReflectionClass(self::class))->getShortName().' => ';
+        return $message . ' - Nine';
     }
 }

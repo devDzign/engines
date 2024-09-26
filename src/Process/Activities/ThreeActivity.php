@@ -10,7 +10,7 @@ use App\Core\Engines\AbstractEngines;
 class ThreeActivity extends AbstractEngines
 {
 
-    public function execute(...$arg): mixed
+    public function execute(...$arg): string
     {
         $message =  $arg[0];
 

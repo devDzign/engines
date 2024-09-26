@@ -11,7 +11,7 @@ use App\Core\Engines\AbstractEngines;
 class EndActivity extends AbstractEngines
 {
 
-    public function execute(...$arg): mixed
+    public function execute(...$arg): string
     {
         $message =  $arg[0];
 

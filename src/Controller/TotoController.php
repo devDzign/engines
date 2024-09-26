@@ -13,13 +13,16 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class TotoController extends AbstractController
 {
+    /**
+     * @throws \Exception
+     */
     #[Route('/', name: 'app_test')]
     public function index(
        ActivityWorkflow $workflow,
     ): JsonResponse
     {
 
-        $message = $workflow->start('Start');
+        $message = $workflow->withArgs(['message' => 'Start'])->start();
 
         return $this->json(
             $message

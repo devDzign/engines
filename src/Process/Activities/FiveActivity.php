@@ -15,6 +15,6 @@ class FiveActivity extends AbstractEngines
     {
         $message =  $arg[0];
 
-        return ['non', $message . ' - Five'];
+        return ['response'=> 'non', 'message' => $message . ' - Five'];
     }
 }

@@ -10,10 +10,15 @@ use App\Core\Engines\AbstractEngines;
 
 class EightActivity extends AbstractEngines
 {
-    public function execute(...$arg): mixed
+
+    /**
+     * @param ...$arg
+     * @return string[]
+     */
+    public function execute(...$arg): array
     {
         $message =  $arg[0];
 
-        return ['non', $message . ' - Eight'];
+        return ['response'=> 'oui', 'message' => $message . ' - Eight'];
     }
 }

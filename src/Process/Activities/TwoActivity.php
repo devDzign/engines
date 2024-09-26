@@ -10,8 +10,9 @@ use App\Core\Engines\AbstractEngines;
 class TwoActivity extends AbstractEngines
 {
 
-    public function execute(...$arg): mixed
+    public function execute(...$arg): string
     {
+
         $message =  $arg[0];
 
         return $message . ' - Two';
