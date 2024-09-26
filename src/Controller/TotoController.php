@@ -2,10 +2,8 @@
 
 namespace App\Controller;
 
-use App\Declaration\Model\Declaration;
 
-use App\Declaration\Workflow\DeclarationCreatedWorkflow;
-use App\Logger\Workflow\LoggerWorkflow;
+use App\Process\Workflow\Activity2Workflow;
 use App\Process\Workflow\ActivityWorkflow;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -18,11 +16,11 @@ class TotoController extends AbstractController
      */
     #[Route('/', name: 'app_test')]
     public function index(
-       ActivityWorkflow $workflow,
+       Activity2Workflow $workflow,
     ): JsonResponse
     {
 
-        $message = $workflow->withArgs(['message' => 'Start'])->start();
+        $message = $workflow->start('Start');
 
         return $this->json(
             $message

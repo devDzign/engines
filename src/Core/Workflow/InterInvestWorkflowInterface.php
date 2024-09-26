@@ -8,7 +8,5 @@ interface InterInvestWorkflowInterface
 {
     public function start(): mixed;
 
-    public function withArgs(?array $arguments = null): self;
-
 
 }

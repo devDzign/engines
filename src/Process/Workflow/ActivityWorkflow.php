@@ -24,25 +24,25 @@ class ActivityWorkflow extends AbstractInterInvestWorkflow
     /**
      * @throws \Exception
      */
-    public function start(): string
+    public function execute(string $message): string
     {
 
-        $stepOne   = $this->make(OneActivity::class)->execute(...$this->arguments);
+        $stepOne   = $this->make(OneActivity::class)->execute($message);
         $stepTwo   = $this->make(TwoActivity::class)->execute($stepOne);
         $stepThree = $this->make(ThreeActivity::class)->execute($stepTwo);
         $stepFour  = $this->make(FourActivity::class)->execute($stepThree);
-        $stepFive  = $this->make(FiveActivity::class)->execute($stepFour);
+        $stepFive  = $this->make(FiveActivity::class)->execute($stepFour, true);
 
         $stepSixOrSaven = match ($stepFive['response']) {
-            'oui' =>  $this->make(SixActivity::class)->execute($stepFive['message']),
-            'non' =>  $this->make(SavenActivity::class)->execute($stepFive['message'])
+             true =>  $this->make(SixActivity::class)->execute($stepFive['message']),
+             false =>  $this->make(SavenActivity::class)->execute($stepFive['message'])
         };
 
-        $stepEight = $this->make(EightActivity::class)->execute($stepSixOrSaven);
+        $stepEight = $this->make(EightActivity::class)->execute($stepSixOrSaven, true);
 
         $stepNineOrTen = match ($stepEight['response']) {
-            'oui' =>  $this->make(NineActivity::class)->execute($stepEight['message']),
-            'non' =>  $this->make(TenActivity::class)->execute($stepEight['message'])
+            true =>  $this->make(NineActivity::class)->execute($stepEight['message']),
+            false =>  $this->make(TenActivity::class)->execute($stepEight['message'])
         };
 
 
@@ -50,35 +50,6 @@ class ActivityWorkflow extends AbstractInterInvestWorkflow
     }
 
 
-//    /**
-//     * @throws \Exception
-//     */
-//    public function start(): string
-//    {
-//        $stepFive = $this->loadEngine(FiveActivity::class)->execute(
-//            $this->loadEngine(FourActivity::class)->execute(
-//                $this->loadEngine(ThreeActivity::class)->execute(
-//                    $this->loadEngine(TwoActivity::class)->execute(
-//                        $this->loadEngine(OneActivity::class)->execute(...$this->arguments)
-//                    )
-//                )
-//            )
-//        );
-//
-//        $stepSixOrSaven = match ($stepFive['response']) {
-//            'oui' => $this->loadEngine(SixActivity::class)->execute($stepFive['message']),
-//            'non' => $this->loadEngine(SavenActivity::class)->execute($stepFive['message'])
-//        };
-//
-//        $stepEight = $this->loadEngine(EightActivity::class)->execute($stepSixOrSaven);
-//
-//        $stepNineOrTen = match ($stepEight['response']) {
-//            'oui' => $this->loadEngine(NineActivity::class)->execute($stepEight['message']),
-//            'non' => $this->loadEngine(TenActivity::class)->execute($stepEight['message'])
-//        };
-//
-//
-//        return $this->loadEngine(EndActivity::class)->execute($stepNineOrTen);
-//    }
+
 
 }

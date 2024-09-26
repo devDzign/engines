@@ -6,7 +6,7 @@ use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 #[AutoconfigureTag()]
 interface EngineInterface
 {
-    public function execute(mixed ...$arg):mixed;
-    public function setNext(EngineInterface $engine): void;
+
+    public function start(): mixed;
     public static function supports(): string;
 }

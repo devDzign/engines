@@ -10,11 +10,8 @@ use App\Core\Engines\AbstractEngines;
 
 class EndActivity extends AbstractEngines
 {
-
-    public function execute(...$arg): string
+    public function execute(string $message): string
     {
-        $message =  $arg[0];
-
         return $message . ' - End';
     }
 }

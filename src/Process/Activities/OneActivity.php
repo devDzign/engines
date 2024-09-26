@@ -11,10 +11,8 @@ use App\Core\Engines\AbstractEngines;
 class OneActivity extends AbstractEngines
 {
 
-    public function execute(...$arg): string
+    public function execute(string $message): string
     {
-
-        $message =  $arg['message'];
 
         return $message . ' - One';
     }

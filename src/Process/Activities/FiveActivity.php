@@ -11,10 +11,8 @@ use App\Core\Engines\AbstractEngines;
 class FiveActivity extends AbstractEngines
 {
 
-    public function execute(...$arg): array
+    public function execute(string $message, bool $decision =  false): array
     {
-        $message =  $arg[0];
-
-        return ['response'=> 'non', 'message' => $message . ' - Five'];
+        return ['response'=> $decision, 'message' => $message . ' - Five'];
     }
 }
