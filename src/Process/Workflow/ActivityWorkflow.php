@@ -24,7 +24,7 @@ class ActivityWorkflow extends AbstractInterInvestWorkflow
     /**
      * @throws \Exception
      */
-    public function start(): string
+    public function start(...$args): string
     {
         $stepOne   = $this->loadEngine(OneActivity::class)->execute(...$args);
         $stepTwo   = $this->loadEngine(TwoActivity::class)->execute($stepOne);
