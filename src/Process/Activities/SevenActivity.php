@@ -8,11 +8,11 @@ namespace App\Process\Activities;
 
 use App\Core\Engines\AbstractEngines;
 
-class SavenActivity extends AbstractEngines
+class SevenActivity extends AbstractEngines
 {
 
     public function execute(string $message): string
     {
-        return $message . ' - Saven';
+        return $message . ' - Seven';
     }
 }

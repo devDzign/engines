@@ -12,7 +12,7 @@ use App\Process\Activities\FiveActivity;
 use App\Process\Activities\FourActivity;
 use App\Process\Activities\NineActivity;
 use App\Process\Activities\OneActivity;
-use App\Process\Activities\SavenActivity;
+use App\Process\Activities\SevenActivity;
 use App\Process\Activities\SixActivity;
 use App\Process\Activities\TenActivity;
 use App\Process\Activities\ThreeActivity;
@@ -21,6 +21,7 @@ use App\Process\Activities\TwoActivity;
 
 class ActivityWorkflow extends AbstractInterInvestWorkflow
 {
+
     /**
      * @throws \Exception
      */
@@ -35,8 +36,9 @@ class ActivityWorkflow extends AbstractInterInvestWorkflow
 
         $stepSixOrSaven = match ($stepFive['response']) {
              true =>  $this->make(SixActivity::class)->execute($stepFive['message']),
-             false =>  $this->make(SavenActivity::class)->execute($stepFive['message'])
+             false =>  $this->make(SevenActivity::class)->execute($stepFive['message'])
         };
+
 
         $stepEight = $this->make(EightActivity::class)->execute($stepSixOrSaven, true);
 

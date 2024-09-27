@@ -14,7 +14,7 @@ abstract class AbstractEngines implements EngineInterface
             return $this->execute(...$arguments);
         }
         // Si la méthode n'existe pas, on lève une exception ou on retourne un message d'erreur
-        throw new \Exception('La méthode "execute" n\'existe pas dans la classe enfant.');
+        throw new \Exception('La méthode "execute" n\'existe pas.');
     }
 
     public static function supports(): string

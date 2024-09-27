@@ -16,14 +16,14 @@ class TotoController extends AbstractController
      */
     #[Route('/', name: 'app_test')]
     public function index(
-       Activity2Workflow $workflow,
+        Activity2Workflow $workflow,
+        ActivityWorkflow $w
     ): JsonResponse
     {
-
-        $message = $workflow->start('Start');
-
         return $this->json(
-            $message
+            $workflow->start(
+                $w->start('Start')
+            )
         );
     }
 }

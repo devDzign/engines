@@ -12,7 +12,7 @@ use App\Process\Activities\FiveActivity;
 use App\Process\Activities\FourActivity;
 use App\Process\Activities\NineActivity;
 use App\Process\Activities\OneActivity;
-use App\Process\Activities\SavenActivity;
+use App\Process\Activities\SevenActivity;
 use App\Process\Activities\SixActivity;
 use App\Process\Activities\TenActivity;
 use App\Process\Activities\ThreeActivity;
@@ -24,21 +24,30 @@ class Activity2Workflow extends AbstractInterInvestWorkflow
     /**
      * @throws \Exception
      */
-    public function execute(string $message): string
+    public function execute(string $message = 'Init'): string
     {
-        [
-            $activityOne,
-            $activityTwo,
-            $activityThree,
-            $activityFour,
-            $activityFive,
-            $activitySix,
-            $activitySaven,
-            $activityEight,
-            $activityNine,
-            $activityTen,
-            $activityEnd
-        ] = $this->initActivities();
+        /** @var OneActivity $activityOne */
+        $activityOne = $this->make(OneActivity::class);
+        /** @var TwoActivity $activityTwo */
+        $activityTwo = $this->make(TwoActivity::class);
+        /** @var ThreeActivity $activityThree */
+        $activityThree = $this->make(ThreeActivity::class);
+        /** @var FourActivity $activityFour */
+        $activityFour = $this->make(FourActivity::class);
+        /** @var FiveActivity $activityFive */
+        $activityFive = $this->make(FiveActivity::class);
+        /** @var SixActivity $activitySix */
+        $activitySix = $this->make(SixActivity::class);
+        /** @var SevenActivity $activitySaven */
+        $activitySaven = $this->make(SevenActivity::class);
+        /** @var EightActivity $activityEight */
+        $activityEight = $this->make(EightActivity::class);
+        /** @var NineActivity $activityNine */
+        $activityNine = $this->make(NineActivity::class);
+        /** @var TenActivity $activityTen */
+        $activityTen = $this->make(TenActivity::class);
+        /** @var EndActivity $activityEnd */
+        $activityEnd = $this->make(EndActivity::class);
 
 
         $activityOneResponse   = $activityOne->execute($message);
@@ -74,7 +83,7 @@ class Activity2Workflow extends AbstractInterInvestWorkflow
      *     FourActivity,
      *     FiveActivity,
      *     SixActivity,
-     *     SavenActivity,
+     *     SevenActivity,
      *     EightActivity,
      *     NineActivity,
      *     TenActivity,
@@ -85,27 +94,16 @@ class Activity2Workflow extends AbstractInterInvestWorkflow
 
     public function initActivities(): array
     {
-        /** @var OneActivity $activityOne */
         $activityOne = $this->make(OneActivity::class);
-        /** @var TwoActivity $activityTwo */
         $activityTwo = $this->make(TwoActivity::class);
-        /** @var ThreeActivity $activityThree */
         $activityThree = $this->make(ThreeActivity::class);
-        /** @var FourActivity $activityFour */
         $activityFour = $this->make(FourActivity::class);
-        /** @var FiveActivity $activityFive */
         $activityFive = $this->make(FiveActivity::class);
-        /** @var SixActivity $activitySix */
         $activitySix = $this->make(SixActivity::class);
-        /** @var SavenActivity $activitySaven */
-        $activitySaven = $this->make(SavenActivity::class);
-        /** @var EightActivity $activityEight */
+        $activitySeven = $this->make(SevenActivity::class);
         $activityEight = $this->make(EightActivity::class);
-        /** @var NineActivity $activityNine */
         $activityNine = $this->make(NineActivity::class);
-        /** @var TenActivity $activityTen */
         $activityTen = $this->make(TenActivity::class);
-        /** @var EndActivity $activityEnd */
         $activityEnd = $this->make(EndActivity::class);
 
         return [
@@ -115,7 +113,7 @@ class Activity2Workflow extends AbstractInterInvestWorkflow
             $activityFour,
             $activityFive,
             $activitySix,
-            $activitySaven,
+            $activitySeven,
             $activityEight,
             $activityNine,
             $activityTen,
