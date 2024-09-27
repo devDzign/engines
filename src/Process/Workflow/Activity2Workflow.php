@@ -21,55 +21,47 @@ use App\Process\Activities\TwoActivity;
 
 class Activity2Workflow extends AbstractIIWorkflow
 {
+    public const string WORKFLOW_NAME = 'activity2.workflow';
+
     /**
      * @throws \Exception
      */
     public function execute(string $message = 'Init'): string
     {
-        /** @var OneActivity $activityOne */
-        $activityOne = $this->make(OneActivity::class);
-        /** @var TwoActivity $activityTwo */
-        $activityTwo = $this->make(TwoActivity::class);
-        /** @var ThreeActivity $activityThree */
-        $activityThree = $this->make(ThreeActivity::class);
-        /** @var FourActivity $activityFour */
-        $activityFour = $this->make(FourActivity::class);
-        /** @var FiveActivity $activityFive */
-        $activityFive = $this->make(FiveActivity::class);
-        /** @var SixActivity $activitySix */
-        $activitySix = $this->make(SixActivity::class);
-        /** @var SevenActivity $activitySaven */
-        $activitySaven = $this->make(SevenActivity::class);
-        /** @var EightActivity $activityEight */
-        $activityEight = $this->make(EightActivity::class);
-        /** @var NineActivity $activityNine */
-        $activityNine = $this->make(NineActivity::class);
-        /** @var TenActivity $activityTen */
-        $activityTen = $this->make(TenActivity::class);
-        /** @var EndActivity $activityEnd */
-        $activityEnd = $this->make(EndActivity::class);
+        [
+            $activityOne,
+            $activityTwo,
+            $activityThree,
+            $activityFour,
+            $activityFive,
+            $activitySix,
+            $activitySeven,
+            $activityEight,
+            $activityNine,
+            $activityTen,
+            $activityEnd
+        ] = $this->initActivities();
 
 
-        $activityOneResponse   = $activityOne->execute($message);
-        $activityTwoResponse   = $activityTwo->execute($activityOneResponse);
-        $activityThreeResponse = $activityThree->execute($activityTwoResponse);
-        $activityFourResponse  = $activityFour->execute($activityThreeResponse);
-        $activityFiveResponse  = $activityFive->execute($activityFourResponse, false);
+        $response   = $activityOne->execute($message);
+        $response   = $activityTwo->execute($response);
+        $response = $activityThree->execute($response);
+        $response  = $activityFour->execute($response);
+        $activityFiveResponse  = $activityFive->execute($response, false);
 
-
-        $activitySixOrSavenResponse = match ($activityFiveResponse['response']) {
+        $response = match ($activityFiveResponse['response']) {
             true => $activitySix->execute($activityFiveResponse['message']),
-            false => $activitySaven->execute($activityFiveResponse['message'])
+            false => $activitySeven->execute($activityFiveResponse['message'])
         };
 
-        $stepEightResponse = $activityEight->execute($activitySixOrSavenResponse, true);
+        $stepEightResponse = $activityEight->execute($response, true);
 
-        $activityNineOrTenResponse = match ($stepEightResponse['response']) {
+        $response = match ($stepEightResponse['response']) {
             true => $activityNine->execute($stepEightResponse['message']),
             false => $activityTen->execute($stepEightResponse['message'])
         };
 
-        return $activityEnd->execute($activityNineOrTenResponse);
+        return $activityEnd->execute($response);
     }
 
 
@@ -94,17 +86,17 @@ class Activity2Workflow extends AbstractIIWorkflow
 
     public function initActivities(): array
     {
-        $activityOne = $this->make(OneActivity::class);
-        $activityTwo = $this->make(TwoActivity::class);
+        $activityOne   = $this->make(OneActivity::class);
+        $activityTwo   = $this->make(TwoActivity::class);
         $activityThree = $this->make(ThreeActivity::class);
-        $activityFour = $this->make(FourActivity::class);
-        $activityFive = $this->make(FiveActivity::class);
-        $activitySix = $this->make(SixActivity::class);
+        $activityFour  = $this->make(FourActivity::class);
+        $activityFive  = $this->make(FiveActivity::class);
+        $activitySix   = $this->make(SixActivity::class);
         $activitySeven = $this->make(SevenActivity::class);
         $activityEight = $this->make(EightActivity::class);
-        $activityNine = $this->make(NineActivity::class);
-        $activityTen = $this->make(TenActivity::class);
-        $activityEnd = $this->make(EndActivity::class);
+        $activityNine  = $this->make(NineActivity::class);
+        $activityTen   = $this->make(TenActivity::class);
+        $activityEnd   = $this->make(EndActivity::class);
 
         return [
             $activityOne,
@@ -117,7 +109,7 @@ class Activity2Workflow extends AbstractIIWorkflow
             $activityEight,
             $activityNine,
             $activityTen,
-            $activityEnd
+            $activityEnd,
         ];
     }
 

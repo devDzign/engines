@@ -9,4 +9,6 @@ interface IIWorkflowInterface
 {
     public function start(): mixed;
 
+    public static function supports(): string;
+
 }

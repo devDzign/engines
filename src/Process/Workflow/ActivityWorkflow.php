@@ -22,6 +22,8 @@ use App\Process\Activities\TwoActivity;
 class ActivityWorkflow extends AbstractIIWorkflow
 {
 
+    public const string WORKFLOW_NAME = 'activity.workflow';
+
     /**
      * @throws \Exception
      */
@@ -50,7 +52,6 @@ class ActivityWorkflow extends AbstractIIWorkflow
 
         return $this->make(EndActivity::class)->execute($stepNineOrTen);
     }
-
 
 
 

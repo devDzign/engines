@@ -19,7 +19,6 @@ abstract class AbstractIIWorkflow implements IIWorkflowInterface
     ) {
     }
 
-
     /**
      * @template T of ActivityInterface
      * @param class-string<T> $className
@@ -41,6 +40,11 @@ abstract class AbstractIIWorkflow implements IIWorkflowInterface
         }
 
         return $this->execute(...$arguments);
+    }
+
+    public static function supports(): string
+    {
+        return static::WORKFLOW_NAME;
     }
 
 }
