@@ -6,9 +6,9 @@ namespace App\Process\Activities;
 
 
 
-use App\Core\Engines\AbstractEngines;
+use App\Core\Activities\AbstractActivity;
 
-class EndActivity extends AbstractEngines
+class EndActivity extends AbstractActivity
 {
     public function execute(string $message): string
     {

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Process\Workflow;
 
-use App\Core\Engines\EngineInterface;
-use App\Core\Workflow\AbstractInterInvestWorkflow;
+use App\Core\Activities\ActivityInterface;
+use App\Core\Workflow\AbstractIIWorkflow;
 use App\Process\Activities\EightActivity;
 use App\Process\Activities\EndActivity;
 use App\Process\Activities\FiveActivity;
@@ -19,7 +19,7 @@ use App\Process\Activities\ThreeActivity;
 use App\Process\Activities\TwoActivity;
 
 
-class ActivityWorkflow extends AbstractInterInvestWorkflow
+class ActivityWorkflow extends AbstractIIWorkflow
 {
 
     /**

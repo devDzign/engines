@@ -2,18 +2,18 @@
 
 namespace App\Core\Workflow;
 
-use App\Core\Engines\EngineInterface;
+use App\Core\Activities\ActivityInterface;
 
 use BadMethodCallException;
 use Exception;
 use Symfony\Component\DependencyInjection\Attribute\AutowireLocator;
 use Symfony\Component\DependencyInjection\ServiceLocator;
 
-abstract class AbstractInterInvestWorkflow implements InterInvestWorkflowInterface
+abstract class AbstractIIWorkflow implements IIWorkflowInterface
 {
 
     public function __construct(
-        #[AutowireLocator(EngineInterface::class, defaultIndexMethod: 'supports')]
+        #[AutowireLocator(ActivityInterface::class, defaultIndexMethod: 'supports')]
         protected ServiceLocator $locator,
 
     ) {
@@ -21,11 +21,11 @@ abstract class AbstractInterInvestWorkflow implements InterInvestWorkflowInterfa
 
 
     /**
-     * @template T of EngineInterface
+     * @template T of ActivityInterface
      * @param class-string<T> $className
      * @throws Exception
      */
-    public function make(string $className): EngineInterface
+    public function make(string $className): ActivityInterface
     {
         if (!$this->locator->has($className)) {
             throw new BadMethodCallException("The class $className does not exist in the container");

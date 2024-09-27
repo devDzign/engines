@@ -6,9 +6,9 @@ namespace App\Process\Activities;
 
 
 
-use App\Core\Engines\AbstractEngines;
+use App\Core\Activities\AbstractActivity;
 
-class FiveActivity extends AbstractEngines
+class FiveActivity extends AbstractActivity
 {
 
     public function execute(string $message, bool $decision =  false): array

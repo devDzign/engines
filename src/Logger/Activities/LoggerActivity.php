@@ -2,17 +2,15 @@
 
 declare(strict_types=1);
 
-namespace App\Process\Activities;
-
+namespace App\Logger\Activities;
 
 use App\Core\Activities\AbstractActivity;
 
-class ThreeActivity extends AbstractActivity
+class LoggerActivity extends AbstractActivity
 {
-
     public function execute(string $message): string
     {
-
-        return $message . ' - Three';
+        return 'Rapport inter invest : '.$message;
     }
+
 }

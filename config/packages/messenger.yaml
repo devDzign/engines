@@ -1,29 +1,36 @@
 framework:
     messenger:
-#        transports:
-#            # https://symfony.com/doc/current/messenger.html#transport-configuration
-#            async:
-#                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
-#                serializer: App\Core\Messenger\Serializer\ExternalJsonMessageSerializer
-#                options:
-#                    exchange:
-#                        name: interinvest_messages
-#                        type: topic
-#                    queues:
-#                        ii_workflow:
-#                            binding_keys: [workflow.*]
-#
-#        default_bus: event.bus
-#
-#        buses:
-#            event.bus:
-#                default_middleware: allow_no_handlers
-#            command.bus: ~
-#            query.bus: ~
-#
-#        routing:
-##            Symfony\Component\Mailer\Messenger\SendEmailMessage: async
-##            Symfony\Component\Notifier\Message\ChatMessage: async
-##            Symfony\Component\Notifier\Message\SmsMessage: async
-#            App\Core\Messenger\Shared\Event\EventInInterface: async
+        transports:
+            publisher:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+                serializer: messenger.transport.symfony_serializer
+                options:
+                    exchange:
+                        name: interinvest_messages
+                        type: topic
+
+
+            # https://symfony.com/doc/current/messenger.html#transport-configuration
+            consumer:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+                serializer: App\Core\Events\Serializer\MessageSerializer
+                options:
+                    # Désactiver la création d'une file d'attente par défaut (step queue à false)
+                    auto_setup: false
+                    exchange:
+                        name: interinvest_messages
+                        type: topic
+                    queues:
+                        ii_workflow:
+                            binding_keys: ['*']
+
+        default_bus: event.bus
+
+        buses:
+            event.bus:
+                default_middleware: allow_no_handlers
+
+        routing:
+            App\Core\Events\Shared\Event\EventOutInterface: publisher
+            App\Core\Events\Shared\Event\EventInInterface: consumer
 

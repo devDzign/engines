@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Process\Activities;
 
 
-use App\Core\Engines\AbstractEngines;
+use App\Core\Activities\AbstractActivity;
 
-class TenActivity extends AbstractEngines
+class TenActivity extends AbstractActivity
 {
 
     public function execute(string $message): string
