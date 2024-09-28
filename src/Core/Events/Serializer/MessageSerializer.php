@@ -46,8 +46,6 @@ class MessageSerializer implements SerializerInterface
 
         $envelope = $this->serializer->decode($encodedEnvelope);
 
-
-
         return $envelope;
     }
 

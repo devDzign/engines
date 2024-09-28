@@ -52,4 +52,5 @@ class TotoController extends AbstractController
           $message
         );
     }
+
 }
